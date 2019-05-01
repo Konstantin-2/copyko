@@ -79,7 +79,7 @@ static void show_version()
 
 static void show_help()
 {
-	cout << _("Usage: cp [OPTION] <module> ... <dest>\n"
+	cout << _("Usage: copyko [OPTION] <module> ... <dest>\n"
 			"Copy kernel modules (ko-files) and its' dependencies to <dest> directory\n"
 			"The program is useful when creating Live CD\n\n"
 			"Options:\n"
