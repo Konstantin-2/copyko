@@ -308,7 +308,7 @@ static void my_copy_file(const fs::path& src, const fs::path& dst)
 
 static void copy_modules()
 {
-	for (auto [mn, mi] : ko_list) { //module name, module info
+	for (auto& [mn, mi] : ko_list) { //module name, module info
 		assert(mi.path);
 		fs::path src = srcdir / *mi.path;
 		fs::path dst = dstdir / *mi.path;
@@ -329,7 +329,7 @@ static void copy_firmware()
 static void show_autoinstalled()
 {
 	bool flg = false;
-	for (auto [mn, ki] : ko_list) {
+	for (auto& [mn, ki] : ko_list) {
 		if (ki.su && !ki.pulled_by.empty()) {
 			cout << _("Module ") << mn << _(" is dependency for");
 			for (const string& s : ki.pulled_by)
@@ -355,7 +355,7 @@ int main(int argc, char ** argv)
 	copy_firmware();
 	if (verbose) {
 		for (const string& f: ko_files)
-				mark_dep(f);
+			mark_dep(f);
 		show_autoinstalled();
 	}
 }
