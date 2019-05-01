@@ -1,0 +1,75 @@
+msgid " is dependency for"
+msgstr ""
+
+msgid " not found"
+msgstr ""
+
+#, c-format
+msgid "Can't copy %s to %s"
+msgstr ""
+
+#, c-format
+msgid "Can't create directory %s"
+msgstr ""
+
+#, c-format
+msgid "Can't make hard link for file %s"
+msgstr ""
+
+#, c-format
+msgid "Can't run %s"
+msgstr ""
+
+msgid "Dependency tree is too deep"
+msgstr ""
+
+msgid "Destination directory is "
+msgstr ""
+
+msgid "Destination firmware directory is "
+msgstr ""
+
+msgid "Module "
+msgstr ""
+
+msgid "Source directory is "
+msgstr ""
+
+msgid "Source firmware directory is "
+msgstr ""
+
+msgid "There are more than one module with same name "
+msgstr ""
+
+#, c-format
+msgid "Unrecognized option %s"
+msgstr ""
+
+msgid ""
+"Usage: cp [OPTION] <module> ... <dest>\n"
+"Copy kernel modules (ko-files) and its' dependencies to <dest> directory\n"
+"The program is useful when creating Live CD\n"
+"\n"
+"Options:\n"
+"  -f, --from=FROM  directory to search kernel modules\n"
+"      --fwsrc=FROM directory to search firmware\n"
+"      --fwdst=TO   directory to store firmware\n"
+"  -l, --link       try to make hard links instead of copy files\n"
+"  -v, --verbose    explain what is being done\n"
+"      --help       display this help and exit\n"
+"      --version    output version information and exit\n"
+"Report bugs to: oks-mgn@mail.ru\n"
+"copyko home page: <NOT YET, TODO>\n"
+"General help using GNU software: <https://www.gnu.org/gethelp/>\n"
+msgstr ""
+
+msgid "You can omit dependency modules because they are autocopied by other modules."
+msgstr ""
+
+msgid ""
+"copyko 0.1\n"
+"Copyright (C) 2019 Oshepkov Kosntantin\n"
+"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\n"
+"This is free software: you are free to change and redistribute it.\n"
+"There is NO WARRANTY, to the extent permitted by law.\n"
+msgstr ""

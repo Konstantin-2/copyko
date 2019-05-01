@@ -1,0 +1,75 @@
+.\" Manpage for copyko.
+.\" Contact oks-mgn@mail.ru to correct errors or typos.
+.TH COPYKO 1 "01 May 2019" "0.1" "copyko man page"
+.SH NAME
+copyko \- copy kernel modules and their dependencies
+.SH SYNOPSIS
+.B copyko
+[\fIOPTIONS\fR] \fImodule\fR ... \fIdestination\fR
+.SH DESCRIPTION
+.B copyko
+copy kernel modules (ko\-files) from source to destination directory.
+The program is useful when creating Live CD.
+If module depends from others, they are copied too recursively.
+Directory structure is copied, modules are placed in same subdirectories.
+Dependend firmware is copied.
+Do not overwrite existing files.
+\fBcopyko\fR uses \fBmodinfo\fR to read dependencies from modules.
+.TP
+\fImodule\fR
+is filename without extention.
+.TP
+\fIdestination\fR
+is directory.
+.SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
+.TP
+\fB\-f\fR, \fB--from\fR=\fIFROM\fR
+directory to search kernel modules, for example /lib/modules/5.1.0-rc7.
+Default value is current kernel version modules directory.
+.TP
+\fB--fwsrc\fR=\fIFROM\fR
+directory to search firmware, for example /lib/firmware.
+Default value is $(--from)/../../firmware
+.TP
+\fB--fwdsr\fR=\fITO\fR
+directory to story firmware, for example mydir/lib/firmware.
+Default value is $(destination)/../../firmware
+.TP
+\fB\-l\fR, \fB--link\fR
+try to make hard links instead of copy files.
+It can speedup copying and save space on hard drive.
+On error only first error message is printed.
+.TP
+\fB\-v\fR, \fB--verbose\fR
+explain what is being done.
+Print some additional info.
+For example, if You copy \fIa\fR and \fIb\fR, module \fIa\fR depends on \fIb\fR, program informs You that it is enough to ask copy only \fIa\fR.
+Module \fIb\fR will be auto copied as dependency.
+.TP
+\fB--help\fR
+display help and exit.
+.TP
+\fB--version\fR
+output version information and exit.
+.SH ASSUMPTIONS
+Modules do not have infinite dependency loops.
+Dependency tree is limited with depth 1024.
+.PP
+File names do not contain spaces and commas.
+Module extension is ".ko".
+.PP
+There are no two or more ko-files with same name in source subdirectories.
+.PP
+Modules are stored inside source directory, there are no symlinks.
+.PP
+All source directories are readable.
+Program silently ignore subdirectories which can not read.
+.SH EXAMPLE
+copyko fuse isofs udf my_livecd/modules/5.1.0-rc7
+.SH SEE ALSO
+modinfo(8)
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Oshepkov Konstantin (oks-mgn@mail.ru)
