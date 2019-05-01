@@ -6,7 +6,7 @@ datarootdir ?= $(prefix)/share
 srcdir ?= .
 
 LDFLAGS += -Wall -Wl,-pie -pipe -lstdc++fs
-CXXFLAGS += -Wno-vla -Wno-parentheses -std=c++17 -pipe -I$(srcdir) -Os -D NDEBUG -DDATAROOTDIR=\"$(datarootdir)\" -fpie
+CXXFLAGS += -std=c++17 -pipe -I$(srcdir) -Os -D NDEBUG -DDATAROOTDIR=\"$(datarootdir)\" -fpie
 CXXFLAGSD = $(CXXFLAGS) -O0 -Wall -ggdb -U NDEBUG
 OBJECTS = $(EXECUTABLE).o
 
