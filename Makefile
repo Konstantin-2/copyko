@@ -32,7 +32,7 @@ ru/$(EXECUTABLE).po : $(EXECUTABLE).pot
 
 ru/LC_MESSAGES/$(EXECUTABLE).mo : ru/$(EXECUTABLE).po
 	@echo 'MO   $@'
-	@mkdir ru/LC_MESSAGES
+	@mkdir -p ru/LC_MESSAGES
 	@msgfmt --output $@ $<
 
 i18n : ru/LC_MESSAGES/$(EXECUTABLE).mo
