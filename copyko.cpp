@@ -91,7 +91,7 @@ static void show_help()
 			"      --help       display this help and exit\n"
 			"      --version    output version information and exit\n"
 			"Report bugs to: oks-mgn@mail.ru\n"
-			"copyko home page: <NOT YET, TODO>\n"
+			"copyko home page: https://github.com/Konstantin-2/copyko.git\n"
 			"General help using GNU software: <https://www.gnu.org/gethelp/>\n");
 	exit(0);
 }
