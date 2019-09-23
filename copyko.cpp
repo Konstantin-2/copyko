@@ -70,7 +70,7 @@ vector<string_view> split_sv(string_view strv)
 
 static void show_version()
 {
-	cout << _("copyko 0.1\nCopyright (C) 2019 Oshepkov Kosntantin\n"
+	cout << _("copyko 0.2\nCopyright (C) 2019 Oshepkov Kosntantin\n"
 	"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\n"
 	"This is free software: you are free to change and redistribute it.\n"
 	"There is NO WARRANTY, to the extent permitted by law.\n");
@@ -102,22 +102,20 @@ static vector<string> parse_args(int argc, char ** argv)
 	vector<string> res;
 	string srcdir_s, dstdir_s, fwsrc_s, fwdst_s;
 	static const struct option longOpts[] = {
-		{"help", no_argument, 0, 0},
-		{"version", no_argument, 0, 0},
-		{"fwsrc", required_argument, 0, 2},
-		{"fwdst", required_argument, 0, 3},
+		{"help", no_argument, 0, 2},
+		{"version", no_argument, 0, 3},
+		{"fwsrc", required_argument, 0, 4},
+		{"fwdst", required_argument, 0, 5},
 		{"verbose", no_argument, 0, 'v'},
 		{"link", no_argument, 0, 'l'},
 		{"from", required_argument, 0, 'f'},
 		{0, no_argument, 0, 0}
 	};
-	int longIndex = 0;
+	int longIndex = -1;
 
 	int c;
 	while ((c = getopt_long(argc, argv, "-vlf:", longOpts, &longIndex)) != -1) {
 		switch (c) {
-		case '?':
-			show_help();
 		case 'f':
 			srcdir_s = optarg;
 			break;
@@ -128,22 +126,32 @@ static vector<string> parse_args(int argc, char ** argv)
 			try_link = true;
 			break;
 		case 2:
-			fwsrc_s = optarg;
+			show_help();
 			break;
 		case 3:
+			show_version();
+			break;
+		case 4:
+			fwsrc_s = optarg;
+			break;
+		case 5:
 			fwdst_s = optarg;
 			break;
-		case 0:
-			if (!strcmp(optarg, "--help"))
-				show_help();
-			else if (!strcmp(optarg, "--version"))
-				show_version();
-			else
-				error(1, 0, _("Unrecognized option %s"), optarg);
 		default:
-			res.emplace_back(optarg);
+			if (optarg)
+				res.emplace_back(optarg);
 		}
 	}
+
+	if (res.empty()) {
+		cout << _("Files to copy are not specified") << '\n';
+		exit(0);
+	} else if (res.size() == 1) {
+		cout << _("Destination directoryis not specified") << '\n';
+		exit(0);
+	}
+	dstdir = res.back();
+	res.pop_back();
 
 	if (srcdir_s.empty()) {
 		struct utsname buffer;
@@ -152,11 +160,6 @@ static vector<string> parse_args(int argc, char ** argv)
 		srcdir_s = string("/lib/modules/"_s) + buffer.release;
 	}
 	srcdir = move(srcdir_s);
-
-	if (res.size() < 2)
-		show_help();
-	dstdir = res.back();
-	res.pop_back();
 
 	fwsrc = fwsrc_s.empty() ?
 		srcdir.parent_path().parent_path() / "firmware"_s :
