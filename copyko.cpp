@@ -18,6 +18,7 @@
 #include <error.h>
 #include <glob.h>
 #include <sys/utsname.h>
+#include <sys/wait.h>
 #define _(STRING) gettext(STRING)
 
 /* Used terms:
@@ -70,7 +71,7 @@ vector<string_view> split_sv(string_view strv)
 
 static void show_version()
 {
-	cout << _("copyko 0.2\nCopyright (C) 2019 Oshepkov Kosntantin\n"
+	cout << _("copyko 0.3\nCopyright (C) 2019-2020 Oshepkov Kosntantin\n"
 	"License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>\n"
 	"This is free software: you are free to change and redistribute it.\n"
 	"There is NO WARRANTY, to the extent permitted by law.\n");
@@ -236,6 +237,8 @@ static vector<string> read_ko(const string& module)
 		}
 	}
 	assert(depends_found);
+	int status;
+	waitpid(pid, &status, 0);
 	return res;
 }
 

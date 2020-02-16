@@ -5,4 +5,4 @@ When You create your own Linux Live CD, You need to copy some kernel modules to 
 This program will help You. It can copy your modules and their dependencies (other modules, firmware) automatically.
 
 Example:
-copyko fuse isofs udf my_livecd/modules/5.1.0-rc7
+copyko fuse isofs udf my_livecd/modules/5.5.0-rc7
