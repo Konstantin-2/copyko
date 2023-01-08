@@ -9,7 +9,7 @@ copyko fuse isofs udf my_livecd/modules/5.5.0-rc7
 make
 
 # Installation
-make install
+sudo make install
 
 # More
 [Linux Live CD](https://github.com/Konstantin-2/livecd)
